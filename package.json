@@ -1,0 +1,38 @@
+{
+  "name": "jubi_utility",
+  "version": "1.0.0",
+  "description": "A simple utility tool I created for a class project.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judia/utility.git"
+  },
+  "keywords": [
+    "utility",
+    "tool"
+  ],
+  "author": "J.V Krakowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/judia/utility/issues"
+  },
+  "homepage": "https://github.com/judia/utility#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "faker": "^3.1.0",
+    "supertest": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.1.2"
+  }
+}
