@@ -28,7 +28,7 @@ exports.debug = function (message, level) {
         }
     }
 };
-exports.versionUp = function versionUp(current, type) { //expected usage: logger.versionUp("1.0.2", Major)
+exports.versionUp = function versionUp(current, type) { //expected usage: logger.versionUp("1.0.2", "Major")
     var result;
     var arrayOfNumbers = current.split('.');
     switch (type) {
