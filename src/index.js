@@ -8,25 +8,30 @@ const datetime = new Date();
 const levels = [
     { level: 0, type: 'information', color: 'blue' },
     { level: 1, type: 'warning', color: 'yellow' },
-    { level: 2, type: 'error', color: 'red' },
+    { level: 2, type: 'error', color: 'red' }
 ];
 exports.debug = function (message, level) {
+    var result = message + ' not printed';
     if (global.DEBUG === true) {
         // write to console message in color
         switch (levels[level].color) {
             case 'blue':
                 console.log(chalk.blue.bgWhite(message));
+                result = message + ' printed as ' + levels[level].type;
                 break;
             case 'yellow':
                 console.warn(chalk.yellow.bgWhite(message));
+                result = message + ' printed as ' + levels[level].type;
                 break;
             case 'red':
                 console.error(chalk.red.bgWhite(message));
+                result = message + ' printed as ' + levels[level].type;
                 break;
             default:
-                console.log(chalk.blue.bgWhite(message));
+                break;
         }
     }
+    return result;
 };
 exports.versionUp = function versionUp(current, type) { //expected usage: logger.versionUp("1.0.2", "Major")
     var result;
@@ -42,7 +47,7 @@ exports.versionUp = function versionUp(current, type) { //expected usage: logger
             result = arrayOfNumbers[0] + "." + arrayOfNumbers[1] + "." + String(parseInt(arrayOfNumbers[2]) + 1);
             break;
         default:
-            result = null;
+            result = "Invalid input arguments";
     }
     return result;
 };
