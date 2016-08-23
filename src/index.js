@@ -1,44 +1,30 @@
+// console colors
 const chalk = require('chalk');
-const file = require('file-system');
 
-const debug = (msg, obj = null, status = null) => {
+// date time functionality
+const datetime = new Date();
 
-// checking if debug is true
-  if (process.env.DEBUG) {
-    // defining dates and times
-    const date = new Date(),
-        days = [ 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat' ],
-        day = date.getDay(),
-        d = date.getDate(),
-        mo = date.getMonth() + 1,
-        y = date.getFullYear(),
-        h = date.getHours(),
-        min = date.getMinutes(),
-        s = date.getSeconds(),
-        ms = date.getMilliseconds(),
-        suf = h < 12 ? 'AM' : 'PM';
-
-        // printing to console
-    console.log();
-    console.log(chalk.bgRed(chalk.dim(days[day] + ' ' + ((h + 11) % 12 + 1) + ':' + (min < 10 ? '0' : '') + min + ':' + (s < 10 ? '0' : '') + s + ' ' + suf)));
-    console.log(chalk.bgGreen((status ? status + ' - ' : '') + chalk.bold(msg)));
-    if (obj && (obj.length > 0 || Object.keys(obj).length > 0)) {
-      console.log(chalk.bgBlue(chalk.black(JSON.stringify(obj, null, 2))));
+// log levels
+const levels = [
+    { level: 0, type: 'information', color: 'blue' },
+    { level: 1, type: 'warning', color: 'yellow' },
+    { level: 2, type: 'error', color: 'red' },
+];
+exports.debug = function (message, level) {
+    if (global.DEBUG === true) {
+        // write to console message in color
+        switch (levels[level].color) {
+            case 'blue':
+                console.log(chalk.blue.bgWhite(message));
+                break;
+            case 'yellow':
+                console.warn(chalk.yellow.bgWhite(message));
+                break;
+            case 'red':
+                console.error(chalk.red.bgWhite(message));
+                break;
+            default:
+                console.log(chalk.blue.bgWhite(message));
+        }
     }
-    console.log();
-
-    // logging to file
-    let pretty = date + '\n';
-    pretty += (status ? status + ' - ' : '') + msg + '\n';
-    if (obj && (obj.length > 0 || Object.keys(obj).length > 0)) {
-      pretty += JSON.stringify(obj, null, 2) + '\n';
-    }
-    pretty += '\n';
-    file.appendFile('log/console.log', pretty, (err) => {
-      if (err) {
-        console.log(chalk.red(error));
-      }
-    });
-
-  }
 };
